@@ -179,6 +179,30 @@ export class Color {
         return newColor;
     }
 
+    /**
+     * 
+     * @param blue The blue component value for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
+     * @returns `Color` class instance with the only change in `blue` and the `hex` value of the colour.
+     */
+     withBlue(blue: number): Color {
+        
+        let newColor: Color = this;
+        blue = (blue > 255) ? 255 : Math.trunc(blue);
+        newColor.blue = blue;
+        
+        let processHex: string = newColor.hex;
+        let redGreenHex = processHex.substring(0, 5);
+        let alphaHex = processHex.substring(7);
+        let blueHex = hexMap[Math.trunc(blue / 16)];
+        blueHex += hexMap[blue % 16];
+
+        processHex = redGreenHex + blueHex + alphaHex;
+        
+        newColor.hex = processHex;
+
+        return newColor;
+    }
+
 }
 
 const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
