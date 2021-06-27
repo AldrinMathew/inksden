@@ -133,6 +133,28 @@ export class Color {
         return newColor;
     }
 
+    /**
+     * 
+     * @param red The red component value for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
+     * @returns `Color` class instance with the only change in `red` and the `hex` value of the colour.
+     */
+     withRed(red: number): Color {
+        
+        let newColor: Color = this;
+        red = (red > 255) ? 255 : Math.trunc(red);
+        newColor.red = red;
+        
+        let processHex: string = newColor.hex;
+        processHex = processHex.substring(3);
+        let redHex = hexMap[Math.trunc(red / 16)];
+        redHex += hexMap[red % 16];
+        processHex = '#' + redHex + processHex;
+        
+        newColor.hex = processHex;
+
+        return newColor;
+    }
+
 }
 
 const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
