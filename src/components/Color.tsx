@@ -57,11 +57,11 @@ export class Color {
 
                 hexValue += 'FF';
                 this.opacity = 1;
-            
+
             } else if (hexValue.length === 8) {
-            
+
                 hexValue += 'F';
-            
+
             }
 
             this.hex = hexValue;
@@ -79,7 +79,7 @@ export class Color {
             const blueString: string = hexValue.substring(5, 7);
             const blueValue: number = hexMap.indexOf(blueString.substring(0, 1)) * 16 + hexMap.indexOf(blueString.substring(0, 2));
             this.blue = blueValue;
-            
+
             const alphaString: string = hexValue.substring(7, 9);
             const alphaValue: number = hexMap.indexOf(alphaString.substring(0, 1)) * 16 + hexMap.indexOf(alphaString.substring(0, 2));
             this.alpha = alphaValue;
@@ -87,6 +87,30 @@ export class Color {
 
         }
     }
+
+    /**
+     * 
+     * @param opacity The opacity for the new colour. It's value ranges from 0 to 1, inclusive of both ends.
+     * @returns `Color` class instance with the only change in `opacity`, `alpha` and the `hex` value of the colour.
+     */
+    withOpacity(opacity: number): Color {
+
+        let newColor: Color = this;
+        opacity = (opacity <= 1) ? (opacity) : (1);
+        newColor.alpha = Math.trunc(opacity * 255);
+        newColor.opacity = opacity;
+        let alpha = opacity * 255;
+
+        let processHex: string = newColor.hex;
+        processHex = processHex.substring(0, 7);
+        processHex += hexMap[Math.trunc(alpha / 16)];
+        processHex += hexMap[alpha % 16];
+
+        newColor.hex = processHex;
+
+        return newColor;
+    }
+
 }
 
 const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
