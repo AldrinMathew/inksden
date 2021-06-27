@@ -1,7 +1,7 @@
 {
   "name": "inksden",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
@@ -39,5 +39,44 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "UI Framework providing cutomizable widgets for better and easier development...",
+  "main": "index.tsx",
+  "devDependencies": {
+    "typescript": "^4.3.2",
+    "@types/node": "^12.20.14",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6"
+  },
+  "peerDependencies": {
+    "typescript": "^4.3.2",
+    "@types/node": "^12.20.14",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aldrinsartfactory/inksden.git"
+  },
+  "keywords": [
+    "ui",
+    "uikit",
+    "widgets",
+    "components",
+    "flutter",
+    "framework",
+    "library",
+    "typescript",
+    "types",
+    "component",
+    "widget",
+    "ink",
+    "aldrin"
+  ],
+  "author": "Aldrin Mathew",
+  "license": "APACHE 2.0",
+  "bugs": {
+    "url": "https://github.com/aldrinsartfactory/inksden/issues"
+  },
+  "homepage": "https://github.com/aldrinsartfactory/inksden#readme"
 }
