@@ -111,6 +111,28 @@ export class Color {
         return newColor;
     }
 
+    /**
+     * 
+     * @param alpha The alpha for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
+     * @returns `Color` class instance with the only change in `alpha`, `opacity` and the `hex` value of the colour.
+     */
+     withAlpha(alpha: number): Color {
+        
+        let newColor: Color = this;
+        alpha = (alpha > 255) ? 255 : Math.trunc(alpha);
+        newColor.alpha = alpha;
+        newColor.opacity = alpha / 255;
+        
+        let processHex: string = newColor.hex;
+        processHex = processHex.substring(0, 7);
+        processHex += hexMap[Math.trunc(alpha / 16)];
+        processHex += hexMap[alpha % 16];
+
+        newColor.hex = processHex;
+
+        return newColor;
+    }
+
 }
 
 const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
