@@ -69,17 +69,6 @@ export default class Color {
             this.hex = hex;
         } else {
 
-            if (hexValue.length === 7) {
-
-                hexValue += 'FF';
-                this.opacity = 1;
-
-            } else if (hexValue.length === 8) {
-
-                hexValue += 'F';
-
-            }
-
             this.hex = hexValue;
 
             // Converting the Hex string to RGBA colour component values.
@@ -105,7 +94,7 @@ export default class Color {
     }
 
     /**
-     * 
+     * Changes the opacity of the corresponding colour instance and returns the value.
      * @param opacity The opacity for the new colour. It's value ranges from 0 to 1, inclusive of both ends.
      * @returns `Color` class instance with the only change in `opacity`, `alpha` and the `hex` value of the colour.
      */
@@ -132,13 +121,13 @@ export default class Color {
      * @param alpha The alpha for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
      * @returns `Color` class instance with the only change in `alpha`, `opacity` and the `hex` value of the colour.
      */
-     withAlpha(alpha: number): Color {
-        
+    withAlpha(alpha: number): Color {
+
         let newColor: Color = this;
         alpha = (alpha > 255) ? 255 : Math.trunc(alpha);
         newColor.alpha = alpha;
         newColor.opacity = alpha / 255;
-        
+
         let processHex: string = newColor.hex;
         processHex = processHex.substring(0, 7);
         processHex += hexMap[Math.trunc(alpha / 16)];
@@ -154,18 +143,18 @@ export default class Color {
      * @param red The red component value for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
      * @returns `Color` class instance with the only change in `red` and the `hex` value of the colour.
      */
-     withRed(red: number): Color {
-        
+    withRed(red: number): Color {
+
         let newColor: Color = this;
         red = (red > 255) ? 255 : Math.trunc(red);
         newColor.red = red;
-        
+
         let processHex: string = newColor.hex;
         processHex = processHex.substring(3);
         let redHex = hexMap[Math.trunc(red / 16)];
         redHex += hexMap[red % 16];
         processHex = '#' + redHex + processHex;
-        
+
         newColor.hex = processHex;
 
         return newColor;
@@ -176,12 +165,12 @@ export default class Color {
      * @param green The green component value for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
      * @returns `Color` class instance with the only change in `green` and the `hex` value of the colour.
      */
-     withGreen(green: number): Color {
-        
+    withGreen(green: number): Color {
+
         let newColor: Color = this;
         green = (green > 255) ? 255 : Math.trunc(green);
         newColor.green = green;
-        
+
         let processHex: string = newColor.hex;
         let redHex = processHex.substring(0, 3);
         let blueAlphaHex = processHex.substring(5);
@@ -189,7 +178,7 @@ export default class Color {
         greenHex += hexMap[green % 16];
 
         processHex = redHex + greenHex + blueAlphaHex;
-        
+
         newColor.hex = processHex;
 
         return newColor;
@@ -200,12 +189,12 @@ export default class Color {
      * @param blue The blue component value for the new colour. It's value ranges from 0 to 255, inclusive of both ends.
      * @returns `Color` class instance with the only change in `blue` and the `hex` value of the colour.
      */
-     withBlue(blue: number): Color {
-        
+    withBlue(blue: number): Color {
+
         let newColor: Color = this;
         blue = (blue > 255) ? 255 : Math.trunc(blue);
         newColor.blue = blue;
-        
+
         let processHex: string = newColor.hex;
         let redGreenHex = processHex.substring(0, 5);
         let alphaHex = processHex.substring(7);
@@ -213,10 +202,38 @@ export default class Color {
         blueHex += hexMap[blue % 16];
 
         processHex = redGreenHex + blueHex + alphaHex;
-        
+
         newColor.hex = processHex;
 
         return newColor;
+    }
+
+    /**
+     * Gets the Red component of the Hex value of the `Color`.
+     */
+    get hexRed(): string {
+        return this.hex.substring(1, 3);
+    }
+
+    /**
+     * Gets the Green component of the Hex value of the `Color`.
+     */
+    get hexGreen(): string {
+        return this.hex.substring(3, 5);
+    }
+
+    /**
+     * Gets the Blue component of the Hex value of the `Color`.
+     */
+    get hexBlue(): string {
+        return this.hex.substring(5, 7);
+    }
+
+    /**
+     * Gets the Alpha component of the Hex value of the `Color`.
+     */
+    get hexAlpha(): string {
+        return this.hex.substring(7);
     }
 
 }
@@ -224,16 +241,32 @@ export default class Color {
 const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
 
 /**
+ * Creates a color from the Hex value provided. If the Hex value does not have an Alpha component, it is automatically added as `'FF'`.
+ * 
+ * If any other color component is not provided, then it is automatically added as `'00'` or `'0'` depending on how much the hex is complete.
  * 
  * @param hex The hex value of the color. It can be without the alpha component, in which case, it adds `FF` to the hex string.
  * @returns `Color` class instance
  */
 export function ColorHex(hex: string): Color {
+    if (hex.substring(0, 1) != '#') {
+        hex = '#' + hex;
+    }
+    if (hex.length < 7) {
+        for (let i: number = 0; i < (7 - hex.length); i++) {
+            hex += '0';
+        }
+        hex += 'FF';
+    } else if (hex.length < 9) {
+        for (let i: number = 0; i < (9 - hex.length); i++) {
+            hex += 'F';
+        }
+    }
     return new Color(undefined, undefined, undefined, undefined, undefined, hex);
 }
 
 /**
- * The alpha value is defaulted to 255 (FF in Hex format) which means no transparency and the color is completely opaque.
+ * The values gets automatically capped at 255. The alpha value is defaulted to 255 (FF in Hex format) which means no transparency and the color is completely opaque.
  * @param red The red component of the color to be returned. This translates to the first 2 characters of the Hex value of the color.
  * @param green The green component of the color to be returned. This translates to the 3rd and 4th characters of the Hex value of the color.
  * @param blue The blue component of the color to be returned. This translates to the 5th and 6th characters of the Hex value of the color.
