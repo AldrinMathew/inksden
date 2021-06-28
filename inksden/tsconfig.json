@@ -33,7 +33,7 @@
     "src/**/*",
     "src/**/**/*",
     "src/**/**/**/*",
-    "src/components/*",
+    "src/widgets/*",
     "src/core/*",
     "src/core/**/*",
     "src/enums/*",

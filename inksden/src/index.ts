@@ -1,4 +1,4 @@
-import Container from "./components/Container";
+import Container from "./widgets/Container";
 import Color from "./core/Color"
 import { Colors } from "./core/Colors";
 import Margin from "./core/Margin";
