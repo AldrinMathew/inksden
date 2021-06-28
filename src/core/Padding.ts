@@ -16,7 +16,7 @@
 
 import { SideInterface, SymmetryInterface } from "../interfaces/Dimensions";
 
-export class Padding {
+export default class Padding {
     top: number;
     left: number;
     right: number;

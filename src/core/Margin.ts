@@ -14,7 +14,7 @@
    limitations under the License.
  */
 
-export class Margin {
+export default class Margin {
     top: number;
     left: number;
     right: number;

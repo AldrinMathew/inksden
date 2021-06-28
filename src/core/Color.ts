@@ -16,7 +16,7 @@
 
 import { RGBAInterface, RGBInterface, RGBOInterface } from "../interfaces/ColorComponents";
 
-export class Color {
+export default class Color {
 
     hex: string;
     red: number;

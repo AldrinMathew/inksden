@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "buildLibrary": "tsc -p .",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -41,7 +42,8 @@
     ]
   },
   "description": "UI Framework providing cutomizable widgets for better and easier development...",
-  "main": "index.tsx",
+  "main": "lib/index.js",
+  "types": "lib",
   "devDependencies": {
     "typescript": "^4.3.2",
     "@types/node": "^12.20.14",
