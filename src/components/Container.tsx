@@ -14,33 +14,34 @@
    limitations under the License.
  */
 
-import React from "react";
-import { Padding, PaddingZero } from '../core/Padding';
-import { Margin, MarginZero } from '../core/Margin';
-import { Color } from "../core/Color";
+import Padding, { PaddingZero } from '../core/Padding';
+import Margin, { MarginZero } from '../core/Margin';
+import Color from "../core/Color";
 import { Colors } from "../core/Colors";
+import Widget from "./Widget";
 
 interface ContainerInterface {
     padding?: Padding,
     margin?: Margin,
     color?: Color,
     textColor?: Color,
-    children?: JSX.Element,
+    opacityForMeAndChildren?: number,
+    children?: Widget<any>,
 }
 
-export default class Container extends React.Component<ContainerInterface> {
+export default class Container extends Widget<ContainerInterface> {
     properties: ContainerInterface;
     constructor(props: ContainerInterface) {
         super(props);
         this.properties = props as ContainerInterface;
     }
-    render(): JSX.Element {
+    build(): JSX.Element {
         const zeroPadding: Padding = PaddingZero();
         const zeroMargin: Margin = MarginZero();
         const style = {
             backgroundColor: (this.properties.color ?? Colors.white).hex,
             color: (this.properties.textColor ?? Colors.black).hex,
-            opacity: (this.properties.color ?? Colors.white).opacity,
+            opacity: this.properties.opacityForMeAndChildren,
             paddingTop: (this.properties.padding ?? zeroPadding).top,
             paddingBottom: (this.properties.padding ?? zeroPadding).bottom,
             paddingLeft: (this.properties.padding ?? zeroPadding).left,
