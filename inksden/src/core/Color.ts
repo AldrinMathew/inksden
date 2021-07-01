@@ -249,7 +249,7 @@ const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C',
  * @returns `Color` class instance
  */
 export function ColorHex(hex: string): Color {
-    if (hex.substring(0, 1) != '#') {
+    if (hex.substring(0, 1) !== '#') {
         hex = '#' + hex;
     }
     if (hex.length < 7) {
