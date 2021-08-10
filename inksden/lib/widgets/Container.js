@@ -35,12 +35,12 @@
  *     is deceiving/misleading or gives out false information.
  */
 
-import { PaddingZero } from '../core/Padding';
-import { MarginZero } from '../core/Margin';
-import { Colors } from "../core/Colors";
-import Widget from "./Widget";
-
-import { jsx as _jsx } from "react/jsx-runtime";
+ import { jsx as _jsx } from "react/jsx-runtime";
+ 
+ import { PaddingZero } from '../core/Padding';
+ import { MarginZero } from '../core/Margin';
+ import { Colors } from "../core/Colors";
+ import Widget from "./Widget";
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -58,7 +58,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function (t) {
+    __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
             for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))

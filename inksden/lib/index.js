@@ -35,21 +35,22 @@
  *     is deceiving/misleading or gives out false information.
  */
 import Container from "./widgets/Container";
-import { ColorHex, ColorRGB, ColorRGBA, ColorRGBO } from "./core/Color";
+import Color, { ColorHex, ColorRGB, ColorRGBA, ColorRGBO } from "./core/Color";
 import { Colors } from "./core/Colors";
 import Margin from "./core/Margin";
 import Padding from "./core/Padding";
 import Widget from "./widgets/Widget";
-var Color = {
-    Hex: ColorHex,
-    RGB: ColorRGB,
-    RGBA: ColorRGBA,
-    RGBO: ColorRGBO,
+var ColorFrom = {
+    hex: ColorHex,
+    rgb: ColorRGB,
+    rgba: ColorRGBA,
+    rgbo: ColorRGBO,
 };
 var Inksden = {
     Widget: Widget,
     Container: Container,
     Color: Color,
+    ColorFrom: ColorFrom,
     Colors: Colors,
     Margin: Margin,
     Padding: Padding,
@@ -57,6 +58,7 @@ var Inksden = {
 export default Inksden;
 export { Container };
 export { Color };
+export { ColorFrom };
 export { Colors };
 export { Margin };
 export { Padding };
