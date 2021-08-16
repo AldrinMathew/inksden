@@ -320,6 +320,64 @@ export default class Color {
         return new Color(red, green, blue, opacity);
     }
 
+    /**
+     * 
+     * @param color The color to be mixed with the original color.
+     * @returns `Color` class instance that represents the mix of two colors.
+     */
+     mix(color: Color): Color {
+        let red: number = (color.red + this.red) / 2;
+        let green: number = (color.green + this.green) / 2;
+        let blue: number = (color.blue + this.blue) / 2;
+        let opacity: number = (color.opacity + this.opacity) / 2;
+        red = (red > 255) ? 255 : red;
+        green = (green > 255) ? 255 : green;
+        blue = (blue > 255) ? 255 : blue;
+        opacity = (opacity > 1) ? 1 : opacity;
+
+        return new Color(red, green, blue, opacity);
+    }
+
+    /**
+     * Static method to mix two colors.
+     * @param color1 The first color to be mixed.
+     * @param color2 The second color to be mixed.
+     * @returns A `Color` class instance that is the mix Color of color2 over color1.
+     */
+    static mixColors(color1: Color, color2: Color): Color {
+        let red: number = (color1.red + color2.red) / 2;
+        let green: number = (color1.green + color2.green) / 2;
+        let blue: number = (color1.blue + color2.blue) / 2;
+        let opacity: number = (color1.opacity + color2.opacity) / 2;
+        red = (red > 255) ? 255 : red;
+        green = (green > 255) ? 255 : green;
+        blue = (blue > 255) ? 255 : blue;
+        opacity = (opacity > 1) ? 1 : opacity;
+
+        return new Color(red, green, blue, opacity);
+    }
+
+    /**
+     * Static method to mix two colors by specifying their hex values.
+     * @param color1 The first color to be mixed.
+     * @param color2 The second color to be mixed.
+     * @returns A `Color` class instance that is the mix Color of color2 over color1.
+     */
+     static mixHexColors(color1: string, color2: string): Color {
+        let color1Color = ColorHex(color1);
+        let color2Color = ColorHex(color2);
+        let red: number = (color1Color.red + color2Color.red) / 2;
+        let green: number = (color1Color.green + color2Color.green) / 2;
+        let blue: number = (color1Color.blue + color2Color.blue) / 2;
+        let opacity: number = (color1Color.opacity + color2Color.opacity) / 2;
+        red = (red > 255) ? 255 : red;
+        green = (green > 255) ? 255 : green;
+        blue = (blue > 255) ? 255 : blue;
+        opacity = (opacity > 1) ? 1 : opacity;
+
+        return new Color(red, green, blue, opacity);
+    }
+
 }
 
 const hexMap = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
